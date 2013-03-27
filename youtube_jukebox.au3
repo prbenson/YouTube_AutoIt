@@ -1,8 +1,5 @@
 #include <IE.au3>
 
-;due to limitations with a web server communicating with IE via COM interface, this slave program communicates via two .ini files
-;swfobject.embedSWF("https://www.youtube.com/v/AAAAAAAAAAA?autoplay=1&controls=0&enablejsapi=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&modestbranding=1&version=3", "ytapiplayer", "1550", "760", "8", null, null, params, atts);
-
 Global $g_eventerror = 0  ; to be checked to know if com error occurs. Must be reset after handling.
 
 $oMyError = ObjEvent("AutoIt.Error","MyErrFunc") ; Install a custom error handler
