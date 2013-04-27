@@ -1,8 +1,21 @@
 #include <IE.au3>
 
+;due to limitations with a web server communicating with IE via COM interface, this slave program communicates via two .ini files
+;swfobject.embedSWF("https://www.youtube.com/v/AAAAAAAAAAA?autoplay=1&controls=0&enablejsapi=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&modestbranding=1&version=3", "ytapiplayer", "1550", "760", "8", null, null, params, atts);
+
 Global $g_eventerror = 0  ; to be checked to know if com error occurs. Must be reset after handling.
 
 $oMyError = ObjEvent("AutoIt.Error","MyErrFunc") ; Install a custom error handler
+
+$yt_state_file = 'youtube_state.ini'
+$yt_video_file = 'youtube_video.ini'
+$yt_video_file_time = FileGetTime($yt_video_file, 0, 1)
+
+If $CmdLine[0] < 1 Then
+	$ie_url = "http://colorcoded.co/youtube/index.html"
+Else
+	$ie_url = $CmdLine[1]
+EndIf
 
 $oIE = _IECreate($ie_url)
 

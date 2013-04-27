@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>YouTube Jukebox</title>
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	var ytplayer;
+
+	function onYouTubePlayerReady(playerId) {
+	  ytplayer = document.getElementById("myytplayer");
+	  ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+	}
+
+	function onytplayerStateChange(newState) {
+		$('#ytstate' ).val(newState);
+	}
+
+	function play(videoId) {
+	  if (ytplayer) {
+		$("#playerdiv").show();
+		ytplayer.loadVideoById(videoId);
+		//ytplayer.playVideo();
+	  }
+	}
+
+	function hideplayer() {
+		$("#playerdiv").hide();
+	}
+
+	function getState() {
+		return $('#ytstate' ).val();
+	}
+
+</script>
+</head>
+<body style="background-color:black;">
+ <div id="playerdiv">
+  <div id="ytapiplayer">
+    You need Flash player 8+ and JavaScript enabled to view this video.
+  </div>
+
+  <script type="text/javascript">
+    var params = { allowScriptAccess: "always", allowFullScreen: "true" };
+    var atts = { id: "myytplayer" };
+    swfobject.embedSWF("https://www.youtube.com/v/5A-cOmaaBgQ?autoplay=1&controls=0&enablejsapi=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3&modestbranding=1&version=3", "ytapiplayer", "1550", "760", "8", null, null, params, atts);
+  </script>
+
+  <div style="display:none;">
+	<input type="text" name="ytstate" id="ytstate"  value="">
+  </div>
+  </div>
+
+</body>
+</html>
